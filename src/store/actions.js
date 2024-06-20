@@ -19,7 +19,7 @@ import {
   ADVERTS_DELETED_FULFILLED,
   ADVERTS_DELETED_REJECTED,
   UI_RESET_ERROR,
-} from "./type";
+} from "./types";
 
 import { areAdvertsLoaded, selectAdvert } from "./selectors";
 

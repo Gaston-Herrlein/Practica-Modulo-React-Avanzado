@@ -4,8 +4,9 @@ import { withExtraArgument } from "redux-thunk";
 
 import * as reducers from "./reducers";
 import * as actionCreators from "./actions";
-import * as auth from "../pages/auth/service";
-import * as tweets from "../pages/tweets/service";
+// import * as auth from "../pages/auth/service"; //NO RESUELTO
+import * as auth from "../components/auth/service";
+import * as adverts from "../components/adverts/service";
 
 const reducer = combineReducers(reducers);
 
@@ -16,7 +17,9 @@ export default function configureStore(preloadedState, { router }) {
     reducer,
     preloadedState,
     composeEnhancers(
-      applyMiddleware(withExtraArgument({ services: { auth, tweets }, router }))
+      applyMiddleware(
+        withExtraArgument({ services: { auth, adverts }, router })
+      )
     )
   );
 
