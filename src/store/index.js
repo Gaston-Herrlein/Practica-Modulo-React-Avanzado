@@ -4,7 +4,6 @@ import { withExtraArgument } from "redux-thunk";
 
 import * as reducers from "./reducers";
 import * as actionCreators from "./actions";
-// import * as auth from "../pages/auth/service"; //NO RESUELTO
 import * as auth from "../components/auth/service";
 import * as adverts from "../components/adverts/service";
 
