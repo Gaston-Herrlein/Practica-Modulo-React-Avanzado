@@ -4,6 +4,7 @@ import {
   ADVERTS_LOADED_FULFILLED,
   ADVERTS_CREATED_FULFILLED,
   ADVERTS_DETAIL_FULFILLED,
+  TAGS_LOADED_FULFILLED,
   UI_RESET_ERROR,
 } from "./types";
 
@@ -45,6 +46,15 @@ export function adverts(state = initialState.adverts, action) {
       return { ...state, data: [action.payload, ...state.data] };
     case ADVERTS_DETAIL_FULFILLED:
       return { ...state, data: [action.payload] };
+    default:
+      return state;
+  }
+}
+
+export function tags(state = initialState.tags, action) {
+  switch (action.type) {
+    case TAGS_LOADED_FULFILLED:
+      return { ...state, loaded: true, data: action.payload };
     default:
       return state;
   }
