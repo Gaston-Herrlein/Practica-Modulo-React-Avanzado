@@ -30,9 +30,9 @@ export const initialState = {
 export function auth(state = initialState.auth, action) {
   switch (action.type) {
     case AUTH_LOGIN_FULFILLED:
-      return true;
+      return { ...state, isAuth: true, jwt: action.payload };
     case AUTH_LOGOUT:
-      return false;
+      return { ...initialState.auth };
     default:
       return state;
   }
