@@ -1,37 +1,26 @@
 import React from "react";
-import { useLocation, useNavigate } from "react-router-dom";
 
-import { useAuth } from "../context";
-import { login } from "../service";
+import { useDispatch, useSelector } from "react-redux";
+import { authLogin, uiResetError } from "../../../store/actions";
+import { getUi } from "../../../store/selectors";
+
 import LoginForm from "./LoginForm";
 
 function LoginPage() {
-  const navigate = useNavigate();
-  const location = useLocation();
-  const handleLogin = useAuth();
-  const [error, setError] = React.useState(null);
-  const [isLoading, setIsLoading] = React.useState(false);
+  const { pending: isFetching, error } = useSelector(getUi);
 
-  const resetError = () => setError(null);
+  const dispatch = useDispatch();
+
+  const resetError = () => dispatch(uiResetError());
 
   const handleSubmit = async (credentials) => {
-    setIsLoading(true);
-    try {
-      await login(credentials);
-      setIsLoading(false);
-      handleLogin();
-      const from = location.state?.from?.pathname || "/";
-      navigate(from);
-    } catch (error) {
-      setIsLoading(false);
-      setError(error);
-    }
+    dispatch(authLogin(credentials));
   };
 
   return (
     <div>
-      <LoginForm onSubmit={handleSubmit} isLoading={isLoading} />
-      {isLoading && <p>...login in nodepop</p>}
+      <LoginForm onSubmit={handleSubmit} isLoading={isFetching} />
+      {isFetching && <p>...login in nodepop</p>}
       {error && (
         <div onClick={resetError} style={{ color: "red" }}>
           {error.message}

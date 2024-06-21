@@ -1,9 +1,9 @@
-import T from 'prop-types';
+import T from "prop-types";
 
-import useForm from '../../../hooks/useForm';
+import useForm from "../../../hooks/useForm";
 
-const validEmail = ({ email }) => email;
-const validPassword = ({ password }) => password;
+// const validEmail = ({ email }) => email;
+// const validPassword = ({ password }) => password;
 
 function LoginForm({ onSubmit, isLoading }) {
   const {
@@ -12,8 +12,8 @@ function LoginForm({ onSubmit, isLoading }) {
     handleSubmit,
     validate,
   } = useForm({
-    email: '',
-    password: '',
+    email: "",
+    password: "",
     remember: false,
   });
   const { email, password, remember } = credentials;
@@ -33,9 +33,7 @@ function LoginForm({ onSubmit, isLoading }) {
         checked={remember}
         onChange={handleChange}
       />
-      <button disabled={!validate(validEmail, validPassword, () => !isLoading)}>
-        Login
-      </button>
+      <button disabled={validate(email, password)}>Login</button>
     </form>
   );
 }
