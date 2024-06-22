@@ -1,11 +1,24 @@
-import { Routes, Route, Navigate } from 'react-router-dom';
+import { Routes, Route, Navigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
 
-import { AdvertPage, AdvertsPage, NewAdvertPage } from '../adverts';
-import { LoginPage, RequireAuth } from '../auth';
-import NotFoundPage from './NotFoundPage';
-import Layout from '../layout';
+import storage from "../../utils/storage";
+import { configureClient } from "../../api/client";
+
+import { authLoginFulfilled } from "../../store/actions";
+
+import { AdvertPage, AdvertsPage, NewAdvertPage } from "../adverts";
+import { LoginPage, RequireAuth } from "../auth";
+import NotFoundPage from "./NotFoundPage";
+import Layout from "../layout";
 
 function App() {
+  const accessToken = storage.get("auth");
+  if (accessToken) {
+    configureClient({ accessToken });
+  }
+  const dispatch = useDispatch();
+  dispatch(authLoginFulfilled(accessToken));
+
   return (
     <Routes>
       <Route
