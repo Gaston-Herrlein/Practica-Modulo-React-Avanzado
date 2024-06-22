@@ -1,4 +1,4 @@
-import T from 'prop-types';
+import T from "prop-types";
 
 export const advert = {
   name: T.string.isRequired,

@@ -1,5 +1,5 @@
-import { useState } from 'react';
-import T from 'prop-types';
+import { useState } from "react";
+import T from "prop-types";
 
 function ConfirmationButton({ confirmation, onConfirm, ...props }) {
   const [confirmationVisible, setConfirmationVisible] = useState(false);

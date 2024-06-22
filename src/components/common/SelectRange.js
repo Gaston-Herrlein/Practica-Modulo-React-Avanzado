@@ -1,7 +1,7 @@
-import React from 'react';
-import T from 'prop-types';
-import { Range } from 'rc-slider';
-import 'rc-slider/assets/index.css';
+import React from "react";
+import T from "prop-types";
+import { Range } from "rc-slider";
+import "rc-slider/assets/index.css";
 
 function SelectRange({ name, onChange, min, max, ...props }) {
   const handleChange = ([minValue, maxValue]) => {

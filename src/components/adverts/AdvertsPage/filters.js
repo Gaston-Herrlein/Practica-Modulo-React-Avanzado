@@ -1,11 +1,11 @@
 export const saleFilter = {
-  all: { value: 'all', label: 'All' },
-  sell: { value: 'sell', label: 'Sell' },
-  buy: { value: 'buy', label: 'Buy' },
+  all: { value: "all", label: "All" },
+  sell: { value: "sell", label: "Sell" },
+  buy: { value: "buy", label: "Buy" },
 };
 
 export const defaultFilters = {
-  name: '',
+  name: "",
   price: [],
   sale: saleFilter.all.value,
   tags: [],
@@ -15,14 +15,14 @@ export const defaultFilters = {
 // filterValue => advert => Boolean
 
 const filterByName =
-  filter =>
+  (filter) =>
   ({ name }) => {
     const cleanFilter = filter.trim();
-    return !cleanFilter || new RegExp(cleanFilter, 'gi').test(name);
+    return !cleanFilter || new RegExp(cleanFilter, "gi").test(name);
   };
 
 const filterByPrice =
-  filter =>
+  (filter) =>
   ({ price }) => {
     if (!filter.length) {
       return true;
@@ -35,7 +35,7 @@ const filterByPrice =
   };
 
 const filterBySale =
-  filter =>
+  (filter) =>
   ({ sale }) =>
     [
       saleFilter.all.value,
@@ -57,9 +57,9 @@ const filterBySale =
 //   };
 
 const filterByTags =
-  filter =>
+  (filter) =>
   ({ tags }) =>
-    !filter.length || filter.every(tag => tags.includes(tag));
+    !filter.length || filter.every((tag) => tags.includes(tag));
 
 // export const filterAdverts = (adverts, { name, price, sale, tags }) => {
 //   const applyFilters = (...filters) =>

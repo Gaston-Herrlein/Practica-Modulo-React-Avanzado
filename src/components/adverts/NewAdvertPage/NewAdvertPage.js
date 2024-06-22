@@ -1,15 +1,15 @@
-import React from 'react';
-import { useNavigate } from 'react-router-dom';
+import React from "react";
+import { useNavigate } from "react-router-dom";
 
-import { createAdvert } from '../service';
-import NewAdvertForm from './NewAdvertForm';
-import navigateAfterRequestError from '../../../utils/navigateAfterRequestError';
+import { createAdvert } from "../service";
+import NewAdvertForm from "./NewAdvertForm";
+import navigateAfterRequestError from "../../../utils/navigateAfterRequestError";
 
 function NewAdvertPage() {
   const navigate = useNavigate();
   const [isLoading, setIsLoading] = React.useState(false);
 
-  const handleSubmit = async newAdvert => {
+  const handleSubmit = async (newAdvert) => {
     setIsLoading(true);
     try {
       const createdAdvert = await createAdvert(newAdvert);

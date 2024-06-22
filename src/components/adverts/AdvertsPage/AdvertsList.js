@@ -1,15 +1,15 @@
-import React from 'react';
-import T from 'prop-types';
-import { Link } from 'react-router-dom';
+import React from "react";
+import T from "prop-types";
+import { Link } from "react-router-dom";
 
-import { advert } from '../propTypes';
+import { advert } from "../propTypes";
 
 function Advert({ name, sale, price, tags }) {
   return (
     <div>
       <p>{name}</p>
-      <p>{sale ? 'Sell' : 'Buy'}</p>
-      <p>{tags.join(', ')}</p>
+      <p>{sale ? "Sell" : "Buy"}</p>
+      <p>{tags.join(", ")}</p>
       <p>{price}</p>
     </div>
   );

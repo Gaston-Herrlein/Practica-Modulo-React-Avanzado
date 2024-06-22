@@ -1,14 +1,14 @@
-import React from 'react';
-import T from 'prop-types';
+import React from "react";
+import T from "prop-types";
 
-import { Link } from 'react-router-dom';
+import { Link } from "react-router-dom";
 
 function EmptyList({ advertsCount }) {
   return (
     <div>
       <p>No adverts here!</p>
       {advertsCount > 0 ? (
-        'Refine your search'
+        "Refine your search"
       ) : (
         <Link to="new">Create the first advert</Link>
       )}

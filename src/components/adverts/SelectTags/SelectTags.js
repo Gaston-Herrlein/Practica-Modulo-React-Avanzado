@@ -1,7 +1,7 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState } from "react";
 
-import { getTags } from '../service';
-import { CheckboxGroup } from '../../common';
+import { getTags } from "../service";
+import { CheckboxGroup } from "../../common";
 
 function SelectTags(props) {
   const [tags, setTags] = useState([]);

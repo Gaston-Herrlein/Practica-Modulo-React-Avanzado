@@ -1,9 +1,9 @@
-import T from 'prop-types';
+import T from "prop-types";
 
-import useForm from '../../../hooks/useForm';
-import { InputFile } from '../../common';
-import SelectTags from '../SelectTags';
-import { useRef } from 'react';
+import useForm from "../../../hooks/useForm";
+import { InputFile } from "../../common";
+import SelectTags from "../SelectTags";
+import { useRef } from "react";
 
 const validName = ({ name }) => name;
 const validPrice = ({ price }) =>
@@ -17,7 +17,7 @@ function NewAdvertForm({ onSubmit, isLoading }) {
     handleSubmit,
     validate,
   } = useForm({
-    name: '',
+    name: "",
     sale: true,
     price: 0,
     tags: [],
@@ -26,14 +26,14 @@ function NewAdvertForm({ onSubmit, isLoading }) {
   const photoRef = useRef(null);
   const { name, sale, price, tags } = advert;
 
-  const handlePhotoChange = ev => {
+  const handlePhotoChange = (ev) => {
     // Store selected file in ref
     photoRef.current = ev.target.files[0];
   };
 
   return (
     <form
-      onSubmit={handleSubmit(advert =>
+      onSubmit={handleSubmit((advert) =>
         // Merge all form data with image from ref
         onSubmit({ ...advert, photo: photoRef.current }),
       )}

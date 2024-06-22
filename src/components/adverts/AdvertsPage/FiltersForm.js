@@ -1,10 +1,10 @@
-import T from 'prop-types';
+import T from "prop-types";
 
-import useForm from '../../../hooks/useForm';
-import SelectTags from '../SelectTags';
-import { RadioGroup, SelectRange } from '../../common';
-import { advert } from '../propTypes';
-import { saleFilter } from './filters';
+import useForm from "../../../hooks/useForm";
+import SelectTags from "../SelectTags";
+import { RadioGroup, SelectRange } from "../../common";
+import { advert } from "../propTypes";
+import { saleFilter } from "./filters";
 
 function FiltersForm({ initialFilters, defaultFilters, onFilter, prices }) {
   const {

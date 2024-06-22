@@ -17,9 +17,9 @@ export default function configureStore(preloadedState, { router }) {
     preloadedState,
     composeEnhancers(
       applyMiddleware(
-        withExtraArgument({ services: { auth, adverts }, router })
-      )
-    )
+        withExtraArgument({ services: { auth, adverts }, router }),
+      ),
+    ),
   );
 
   return store;

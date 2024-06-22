@@ -1,9 +1,9 @@
-import { useEffect, useState } from 'react';
-import { useParams, useNavigate } from 'react-router-dom';
+import { useEffect, useState } from "react";
+import { useParams, useNavigate } from "react-router-dom";
 
-import AdvertDetail from './AdvertDetail';
-import { getAdvert, deleteAdvert } from '../service';
-import navigateAfterRequestError from '../../../utils/navigateAfterRequestError';
+import AdvertDetail from "./AdvertDetail";
+import { getAdvert, deleteAdvert } from "../service";
+import navigateAfterRequestError from "../../../utils/navigateAfterRequestError";
 
 function AdvertPage() {
   const { advertId } = useParams();
@@ -14,11 +14,11 @@ function AdvertPage() {
   useEffect(() => {
     setIsLoading(true);
     getAdvert(advertId)
-      .then(advert => {
+      .then((advert) => {
         setAdvert(advert);
         setIsLoading(false);
       })
-      .catch(error => {
+      .catch((error) => {
         setIsLoading(false);
         navigateAfterRequestError(error, navigate);
       });
@@ -29,7 +29,7 @@ function AdvertPage() {
     try {
       await deleteAdvert(advertId);
       setIsLoading(false);
-      navigate('/');
+      navigate("/");
     } catch (error) {
       setIsLoading(false);
       navigateAfterRequestError(error, navigate);
@@ -37,7 +37,7 @@ function AdvertPage() {
   };
 
   if (isLoading) {
-    return 'Loading...';
+    return "Loading...";
   }
 
   return (

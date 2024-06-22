@@ -1,16 +1,16 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState } from "react";
 
-import FiltersForm from './FiltersForm';
-import AdvertsList from './AdvertsList';
-import EmptyList from './EmptyList';
-import storage from '../../../utils/storage';
-import { getAdverts } from '../service';
-import { defaultFilters, filterAdverts } from './filters';
-import { useNavigate } from 'react-router-dom';
-import navigateAfterRequestError from '../../../utils/navigateAfterRequestError';
+import FiltersForm from "./FiltersForm";
+import AdvertsList from "./AdvertsList";
+import EmptyList from "./EmptyList";
+import storage from "../../../utils/storage";
+import { getAdverts } from "../service";
+import { defaultFilters, filterAdverts } from "./filters";
+import { useNavigate } from "react-router-dom";
+import navigateAfterRequestError from "../../../utils/navigateAfterRequestError";
 
-const getFilters = () => storage.get('filters') || defaultFilters;
-const saveFilters = filters => storage.set('filters', filters);
+const getFilters = () => storage.get("filters") || defaultFilters;
+const saveFilters = (filters) => storage.set("filters", filters);
 
 function AdvertsPage() {
   const navigate = useNavigate();
@@ -21,11 +21,11 @@ function AdvertsPage() {
   useEffect(() => {
     setIsLoading(true);
     getAdverts()
-      .then(adverts => {
+      .then((adverts) => {
         setIsLoading(false);
         setAdverts(adverts);
       })
-      .catch(error => {
+      .catch((error) => {
         setIsLoading(false);
         navigateAfterRequestError(error, navigate);
       });
@@ -38,7 +38,7 @@ function AdvertsPage() {
   const filteredAdverts = filterAdverts(adverts, filters);
 
   if (isLoading) {
-    return 'Loading...';
+    return "Loading...";
   }
 
   return (

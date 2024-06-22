@@ -1,13 +1,13 @@
-import { useRef, useState } from 'react';
-import T from 'prop-types';
+import { useRef, useState } from "react";
+import T from "prop-types";
 
-import placeholder from '../../assets/images/placeholder.png';
+import placeholder from "../../assets/images/placeholder.png";
 
 function InputFile({ onChange, ...props }) {
   const inputRef = useRef(null);
   const [src, setSrc] = useState(null);
 
-  const loadSrcFromFile = file => {
+  const loadSrcFromFile = (file) => {
     if (!file) {
       setSrc(null);
       return;
@@ -23,7 +23,7 @@ function InputFile({ onChange, ...props }) {
     inputRef.current.click();
   };
 
-  const handleChange = ev => {
+  const handleChange = (ev) => {
     const file = ev.target.files[0];
     loadSrcFromFile(file);
     onChange(ev);
@@ -34,7 +34,7 @@ function InputFile({ onChange, ...props }) {
       <input
         ref={inputRef}
         type="file"
-        style={{ display: 'none' }}
+        style={{ display: "none" }}
         onChange={handleChange}
         {...props}
       />
@@ -44,7 +44,7 @@ function InputFile({ onChange, ...props }) {
         alt=""
         width="200"
         height="200"
-        style={{ objectFit: 'contain' }}
+        style={{ objectFit: "contain" }}
       />
     </>
   );

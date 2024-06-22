@@ -1,9 +1,9 @@
-import { NavLink } from 'react-router-dom';
-import { AuthButton } from '../auth';
+import { NavLink } from "react-router-dom";
+import { AuthButton } from "../auth";
 
-import './Header.css';
+import "./Header.css";
 
-const isSelected = ({ isActive }) => (isActive ? 'selected' : '');
+const isSelected = ({ isActive }) => (isActive ? "selected" : "");
 
 function Header() {
   return (
