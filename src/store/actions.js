@@ -65,9 +65,9 @@ export const authLogoutRejected = (error) => ({
 export const logout = () => {
   return async function (dispatch, _getState, { services: { auth }, router }) {
     try {
-      dispatch(authLogoutPending);
+      dispatch(authLogoutPending());
       await auth.logout();
-      dispatch(authLogoutFulfilled);
+      dispatch(authLogoutFulfilled());
       const to = router.state.location.state?.from || "/login";
       router.navigate(to, { replace: true });
     } catch (error) {
