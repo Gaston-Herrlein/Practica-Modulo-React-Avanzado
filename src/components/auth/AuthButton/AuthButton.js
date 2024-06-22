@@ -1,15 +1,22 @@
-import { Link } from 'react-router-dom';
+import { Link } from "react-router-dom";
 
-import { ConfirmationButton } from '../../common';
-import { logout } from '../service';
-import { useAuth } from '../context';
+import { useDispatch, useSelector } from "react-redux";
+import { getIsLogged } from "../../../store/selectors";
+import { logout } from "../../../store/actions";
+
+import { ConfirmationButton } from "../../common";
+// import { logout } from "../service";
+// import { useAuth } from "../context";
 
 const AuthButton = () => {
-  const { isLogged, handleLogout } = useAuth();
+  const dispatch = useDispatch();
+  const isLogged = useSelector(getIsLogged);
+
+  // const { isLogged, handleLogout } = useAuth();
 
   const handleLogoutConfirm = async () => {
-    await logout();
-    handleLogout();
+    // await logout();
+    dispatch(logout());
   };
 
   return isLogged ? (

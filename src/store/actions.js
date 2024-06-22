@@ -2,7 +2,9 @@ import {
   AUTH_LOGIN_PENDING,
   AUTH_LOGIN_FULFILLED,
   AUTH_LOGIN_REJECTED,
-  AUTH_LOGOUT,
+  AUTH_LOGOUT_PENDING,
+  AUTH_LOGOUT_FULFILLED,
+  AUTH_LOGOUT_REJECTED,
   TAGS_LOADED_PENDING,
   TAGS_LOADED_FULFILLED,
   TAGS_LOADED_REJECTED,
@@ -48,7 +50,27 @@ export const authLogin = (credentials) => {
   };
 };
 
-export const authLogout = () => ({ type: AUTH_LOGOUT });
+export const authLogoutPending = () => ({ type: AUTH_LOGOUT_PENDING });
+
+export const authLogoutFulfilled = () => ({ type: AUTH_LOGOUT_FULFILLED });
+
+export const authLogoutRejected = (error) => ({
+  type: AUTH_LOGOUT_REJECTED,
+  payload: error,
+  error: true,
+});
+
+export const logout = () => {
+  return async function (dispatch, _getState, { services: { auth }, router }) {
+    try {
+      dispatch(authLogoutPending);
+      await auth.logout();
+      dispatch(authLogoutFulfilled);
+    } catch (error) {
+      dispatch(authLogoutRejected(error));
+    }
+  };
+};
 
 export const tagsLoadedPending = () => ({ type: TAGS_LOADED_PENDING });
 export const tagsLoadedFulfilled = () => ({ type: TAGS_LOADED_FULFILLED });

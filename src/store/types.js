@@ -2,7 +2,9 @@ export const AUTH_LOGIN_PENDING = "auth/login/pending";
 export const AUTH_LOGIN_FULFILLED = "auth/login/fulfilled";
 export const AUTH_LOGIN_REJECTED = "auth/login/rejected";
 
-export const AUTH_LOGOUT = "auth/logout";
+export const AUTH_LOGOUT_PENDING = "auth/logout/pending";
+export const AUTH_LOGOUT_FULFILLED = "auth/logout/fulfilled";
+export const AUTH_LOGOUT_REJECTED = "auth/logout/rejected";
 
 export const TAGS_LOADED_PENDING = "tags/loaded/pending";
 export const TAGS_LOADED_FULFILLED = "tags/loaded/fulfilled";

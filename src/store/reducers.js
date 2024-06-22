@@ -1,6 +1,6 @@
 import {
   AUTH_LOGIN_FULFILLED,
-  AUTH_LOGOUT,
+  AUTH_LOGOUT_FULFILLED,
   ADVERTS_LOADED_FULFILLED,
   ADVERTS_CREATED_FULFILLED,
   ADVERTS_DETAIL_FULFILLED,
@@ -31,7 +31,7 @@ export function auth(state = initialState.auth, action) {
   switch (action.type) {
     case AUTH_LOGIN_FULFILLED:
       return { ...state, isAuth: true, jwt: action.payload };
-    case AUTH_LOGOUT:
+    case AUTH_LOGOUT_FULFILLED:
       return { ...initialState.auth };
     default:
       return state;
