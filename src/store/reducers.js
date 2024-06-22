@@ -11,7 +11,7 @@ import {
 export const initialState = {
   auth: {
     isAuth: false,
-    jwt: "",
+    accessToken: "",
   },
   adverts: {
     loaded: false,
@@ -30,7 +30,7 @@ export const initialState = {
 export function auth(state = initialState.auth, action) {
   switch (action.type) {
     case AUTH_LOGIN_FULFILLED:
-      return { ...state, isAuth: true, jwt: action.payload };
+      return { ...state, ...{ isAuth: true, accessToken: action.payload } };
     case AUTH_LOGOUT_FULFILLED:
       return { ...initialState.auth };
     default:

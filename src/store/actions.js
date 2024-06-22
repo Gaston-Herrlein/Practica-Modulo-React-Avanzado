@@ -27,7 +27,10 @@ import { areAdvertsLoaded, selectAdvert } from "./selectors";
 
 export const authLoginPending = () => ({ type: AUTH_LOGIN_PENDING });
 
-export const authLoginFulfilled = () => ({ type: AUTH_LOGIN_FULFILLED });
+export const authLoginFulfilled = (accessToken) => ({
+  type: AUTH_LOGIN_FULFILLED,
+  payload: accessToken,
+});
 
 export const authLoginRejected = (error) => ({
   type: AUTH_LOGIN_REJECTED,
@@ -40,8 +43,7 @@ export const authLogin = (credentials) => {
     try {
       dispatch(authLoginPending());
       const accessToken = await auth.login(credentials);
-      console.log({ accessToken });
-      dispatch(authLoginFulfilled({ accessToken }));
+      dispatch(authLoginFulfilled(accessToken));
       const to = router.state.location.state?.from || "/";
       router.navigate(to, { replace: true });
     } catch (error) {

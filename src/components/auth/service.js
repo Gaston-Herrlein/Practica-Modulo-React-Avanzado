@@ -1,7 +1,7 @@
-import client, { configureClient, resetClient } from '../../api/client';
-import storage from '../../utils/storage';
+import client, { configureClient, resetClient } from "../../api/client";
+import storage from "../../utils/storage";
 
-const authPath = '/auth';
+const authPath = "/auth";
 
 export const login = ({ remember, ...credentials }) => {
   return client
@@ -10,11 +10,12 @@ export const login = ({ remember, ...credentials }) => {
       configureClient({ accessToken });
       return accessToken;
     })
-    .then(accessToken => {
-      storage.remove('auth');
+    .then((accessToken) => {
+      storage.remove("auth");
       if (remember) {
-        storage.set('auth', accessToken);
+        storage.set("auth", accessToken);
       }
+      return accessToken;
     });
 };
 
