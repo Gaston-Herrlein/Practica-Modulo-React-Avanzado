@@ -68,6 +68,8 @@ export const logout = () => {
       dispatch(authLogoutPending);
       await auth.logout();
       dispatch(authLogoutFulfilled);
+      const to = router.state.location.state?.from || "/login";
+      router.navigate(to, { replace: true });
     } catch (error) {
       dispatch(authLogoutRejected(error));
     }
