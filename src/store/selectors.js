@@ -1,7 +1,4 @@
 export const getIsLogged = (state) => {
-  console.log("Auth: ", state.auth);
-  console.log("JWT: ", state.auth.jwt);
-  console.log("Auth-isAuth: ", state.auth.isAuth);
   return state.auth.isAuth;
 };
 export const areAdvertsLoaded = (state) => state.adverts.loaded;
