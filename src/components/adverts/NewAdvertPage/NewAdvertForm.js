@@ -35,7 +35,7 @@ function NewAdvertForm({ onSubmit, isLoading }) {
     <form
       onSubmit={handleSubmit((advert) =>
         // Merge all form data with image from ref
-        onSubmit({ ...advert, photo: photoRef.current }),
+        onSubmit({ ...advert, photo: photoRef.current })
       )}
     >
       <input name="name" value={name} onChange={handleChange} />
@@ -54,7 +54,7 @@ function NewAdvertForm({ onSubmit, isLoading }) {
         // not finite number price
         // zero tags selected
         // isLoading
-        disabled={!validate(validName, validPrice, validTags, () => !isLoading)}
+        disabled={!validate(validName, validPrice, validTags, () => isLoading)}
       >
         Save
       </button>

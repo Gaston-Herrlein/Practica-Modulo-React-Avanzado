@@ -134,9 +134,9 @@ export const advertDetails = (advertId) => {
 };
 
 export const advertsCreatedPending = () => ({ type: ADVERTS_CREATED_PENDING });
-export const advertsCreatedFulfilled = (tweet) => ({
+export const advertsCreatedFulfilled = (advert) => ({
   type: ADVERTS_CREATED_FULFILLED,
-  payload: tweet,
+  payload: advert,
 });
 export const advertsCreatedRejected = (error) => ({
   type: ADVERTS_CREATED_REJECTED,
@@ -144,15 +144,15 @@ export const advertsCreatedRejected = (error) => ({
   error: true,
 });
 
-export const createTweet = (tweet) => {
+export const createAdvert = (advert) => {
   return async function (dispatch, _getState, { services, router }) {
     try {
       dispatch(advertsCreatedPending());
-      const { id } = await services.adverts.createTweet(tweet);
-      const createdTweet = await services.adverts.getTweet(id);
-      dispatch(advertsCreatedFulfilled(createdTweet));
-      router.navigate(`/adverts/${createdTweet.id}`);
-      return createdTweet;
+      const { id } = await services.adverts.createAdvert(advert);
+      const createdAdvert = await services.adverts.getAdvert(id);
+      dispatch(advertsCreatedFulfilled(createdAdvert));
+      router.navigate(`/adverts/${createdAdvert.id}`);
+      return createdAdvert;
     } catch (error) {
       dispatch(advertsCreatedRejected(error));
     }

@@ -43,7 +43,7 @@ export function adverts(state = initialState.adverts, action) {
     case ADVERTS_LOADED_FULFILLED:
       return { ...state, loaded: true, data: action.payload };
     case ADVERTS_CREATED_FULFILLED:
-      return { ...state, data: [action.payload, ...state.data] };
+      return { ...state, loaded: true, data: [action.payload, ...state.data] };
     case ADVERTS_DETAIL_FULFILLED:
       return { ...state, loaded: true, data: [action.payload] };
     default:

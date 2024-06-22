@@ -1,24 +1,17 @@
 import React from "react";
-import { useNavigate } from "react-router-dom";
 
-import { createAdvert } from "../service";
+import { useDispatch, useSelector } from "react-redux";
+import { areAdvertsLoaded } from "../../../store/selectors";
+
 import NewAdvertForm from "./NewAdvertForm";
-import navigateAfterRequestError from "../../../utils/navigateAfterRequestError";
+import { createAdvert } from "../../../store/actions";
 
 function NewAdvertPage() {
-  const navigate = useNavigate();
-  const [isLoading, setIsLoading] = React.useState(false);
+  const dispatch = useDispatch();
+  const isLoading = useSelector(areAdvertsLoaded);
 
   const handleSubmit = async (newAdvert) => {
-    setIsLoading(true);
-    try {
-      const createdAdvert = await createAdvert(newAdvert);
-      setIsLoading(false);
-      navigate(`/adverts/${createdAdvert.id}`);
-    } catch (error) {
-      setIsLoading(false);
-      navigateAfterRequestError(error, navigate);
-    }
+    dispatch(createAdvert(newAdvert));
   };
 
   return <NewAdvertForm onSubmit={handleSubmit} isLoading={isLoading} />;
