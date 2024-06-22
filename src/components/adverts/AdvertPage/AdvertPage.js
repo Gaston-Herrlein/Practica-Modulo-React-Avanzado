@@ -3,7 +3,7 @@ import { useParams } from "react-router-dom";
 
 import { useDispatch, useSelector } from "react-redux";
 import { selectAdvert, areAdvertsLoaded } from "../../../store/selectors";
-import { loadAdvert } from "../../../store/actions";
+import { advertDetails, advertDeleted } from "../../../store/actions";
 
 import AdvertDetail from "./AdvertDetail";
 function AdvertPage() {
@@ -13,19 +13,11 @@ function AdvertPage() {
   const isLoading = useSelector(areAdvertsLoaded);
 
   useEffect(() => {
-    dispatch(loadAdvert(advertId));
+    dispatch(advertDetails(advertId));
   }, [advertId, dispatch]);
 
   const handleDelete = async () => {
-    // setIsLoading(true);
-    // try {
-    //   await deleteAdvert(advertId);
-    //   setIsLoading(false);
-    //   navigate("/");
-    // } catch (error) {
-    //   setIsLoading(false);
-    //   navigateAfterRequestError(error, navigate);
-    // }
+    dispatch(advertDeleted(advertId));
   };
 
   if (!isLoading) {

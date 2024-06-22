@@ -17,9 +17,9 @@ import {
   ADVERTS_CREATED_PENDING,
   ADVERTS_CREATED_FULFILLED,
   ADVERTS_CREATED_REJECTED,
-  ADVERTS_DELETED_PENDING,
-  ADVERTS_DELETED_FULFILLED,
-  ADVERTS_DELETED_REJECTED,
+  ADVERT_DELETED_PENDING,
+  ADVERT_DELETED_FULFILLED,
+  ADVERT_DELETED_REJECTED,
   UI_RESET_ERROR,
 } from "./types";
 import { areAdvertsLoaded, selectAdvert } from "./selectors";
@@ -117,7 +117,7 @@ export const advertsDetailRejected = (error) => ({
   error: true,
 });
 
-export const loadAdvert = (advertId) => {
+export const advertDetails = (advertId) => {
   return async function (dispatch, getState, { services }) {
     const state = getState();
     if (selectAdvert(advertId)(state)) {
@@ -159,15 +159,31 @@ export const createTweet = (tweet) => {
   };
 };
 
-export const advertsDeletedPending = () => ({ type: ADVERTS_DELETED_PENDING });
-export const advertsDeletedFulfilled = () => ({
-  type: ADVERTS_DELETED_FULFILLED,
+export const advertDeletedPending = () => ({ type: ADVERT_DELETED_PENDING });
+export const advertDeletedFulfilled = () => ({
+  type: ADVERT_DELETED_FULFILLED,
 });
-export const advertsDeletedRejected = (error) => ({
-  type: ADVERTS_DELETED_REJECTED,
+export const advertDeletedRejected = (error) => ({
+  type: ADVERT_DELETED_REJECTED,
   payload: error,
   error: true,
 });
+
+export const advertDeleted = (advertId) => {
+  return async function (dispatch, getState, { services }) {
+    const state = getState();
+    if (selectAdvert(advertId)(state)) {
+      return;
+    }
+    try {
+      dispatch(advertDeletedPending());
+      await services.adverts.deleteAdvert(advertId);
+      dispatch(advertDeletedFulfilled());
+    } catch (error) {
+      dispatch(advertDeletedRejected(error));
+    }
+  };
+};
 
 export const uiResetError = () => ({
   type: UI_RESET_ERROR,
