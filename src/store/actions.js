@@ -22,7 +22,7 @@ import {
   ADVERT_DELETED_REJECTED,
   UI_RESET_ERROR,
 } from "./types";
-import { areAdvertsLoaded, selectAdvert } from "./selectors";
+import { areAdvertsLoaded, selectAdvert, areTagsLoaded } from "./selectors";
 
 export const authLoginPending = () => ({ type: AUTH_LOGIN_PENDING });
 export const authLoginFulfilled = (accessToken) => ({
@@ -78,6 +78,22 @@ export const tagsLoadedRejected = (error) => ({
   payload: error,
   error: true,
 });
+
+export const loadTags = () => {
+  return async function (dispatch, getState, { services }) {
+    const state = getState();
+    if (areTagsLoaded(state)) {
+      return;
+    }
+    try {
+      dispatch(tagsLoadedPending());
+      const tags = await services.adverts.getTags();
+      dispatch(advertsLoadedFulfilled(tags));
+    } catch (error) {
+      dispatch(advertsLoadedRejected(error));
+    }
+  };
+};
 
 export const advertsLoadedPending = () => ({ type: ADVERTS_LOADED_PENDING });
 export const advertsLoadedFulfilled = (adverts) => ({
