@@ -22,7 +22,7 @@ Advert.propTypes = {
 function AdvertsList({ adverts }) {
   const renderAdvert = ({ id, ...advert }) => (
     <li key={id}>
-      <Link to={id}>
+      <Link to={`/adverts/${id}`}>
         <Advert {...advert} />
       </Link>
     </li>

@@ -7,6 +7,6 @@ export const areTagsLoaded = (state) => state.tags.loaded;
 export const selectTags = (state) => state.tags.data;
 
 export const selectAdvert = (advertsId) => (state) =>
-  selectAdverts(state).find((tweet) => tweet.id === Number(advertsId));
+  selectAdverts(state).find((advert) => advert.id === advertsId);
 
 export const getUi = (state) => state.ui;

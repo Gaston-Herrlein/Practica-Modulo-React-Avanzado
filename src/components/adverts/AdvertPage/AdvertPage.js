@@ -1,45 +1,36 @@
-import { useEffect, useState } from "react";
-import { useParams, useNavigate } from "react-router-dom";
+import { useEffect } from "react";
+import { useParams } from "react-router-dom";
+
+import { useDispatch, useSelector } from "react-redux";
+import { selectAdvert, areAdvertsLoaded } from "../../../store/selectors";
+import { loadAdvert } from "../../../store/actions";
 
 import AdvertDetail from "./AdvertDetail";
-import { getAdvert, deleteAdvert } from "../service";
-import navigateAfterRequestError from "../../../utils/navigateAfterRequestError";
-
 function AdvertPage() {
+  const dispatch = useDispatch();
   const { advertId } = useParams();
-  const navigate = useNavigate();
-  const [advert, setAdvert] = useState(null);
-  const [isLoading, setIsLoading] = useState(true);
+  const advert = useSelector(selectAdvert(advertId));
+  const isLoading = useSelector(areAdvertsLoaded);
 
   useEffect(() => {
-    setIsLoading(true);
-    getAdvert(advertId)
-      .then((advert) => {
-        setAdvert(advert);
-        setIsLoading(false);
-      })
-      .catch((error) => {
-        setIsLoading(false);
-        navigateAfterRequestError(error, navigate);
-      });
-  }, [advertId, navigate]);
+    dispatch(loadAdvert(advertId));
+  }, [advertId, dispatch]);
 
   const handleDelete = async () => {
-    setIsLoading(true);
-    try {
-      await deleteAdvert(advertId);
-      setIsLoading(false);
-      navigate("/");
-    } catch (error) {
-      setIsLoading(false);
-      navigateAfterRequestError(error, navigate);
-    }
+    // setIsLoading(true);
+    // try {
+    //   await deleteAdvert(advertId);
+    //   setIsLoading(false);
+    //   navigate("/");
+    // } catch (error) {
+    //   setIsLoading(false);
+    //   navigateAfterRequestError(error, navigate);
+    // }
   };
 
-  if (isLoading) {
+  if (!isLoading) {
     return "Loading...";
   }
-
   return (
     advert && (
       <AdvertDetail onDelete={handleDelete} isLoading={isLoading} {...advert} />

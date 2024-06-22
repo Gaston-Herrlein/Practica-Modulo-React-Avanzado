@@ -107,9 +107,9 @@ export const loadAdverts = () => {
 };
 
 export const advertsDetailPending = () => ({ type: ADVERTS_DETAIL_PENDING });
-export const advertsDetailFulfilled = (tweet) => ({
+export const advertsDetailFulfilled = (advert) => ({
   type: ADVERTS_DETAIL_FULFILLED,
-  payload: tweet,
+  payload: advert,
 });
 export const advertsDetailRejected = (error) => ({
   type: ADVERTS_DETAIL_REJECTED,
@@ -117,17 +117,16 @@ export const advertsDetailRejected = (error) => ({
   error: true,
 });
 
-export const loadTweet = (tweetId) => {
+export const loadAdvert = (advertId) => {
   return async function (dispatch, getState, { services }) {
     const state = getState();
-    if (selectAdvert(tweetId)(state)) {
+    if (selectAdvert(advertId)(state)) {
       return;
     }
-
     try {
       dispatch(advertsDetailPending());
-      const tweet = await services.adverts.getTweet(tweetId);
-      dispatch(advertsDetailFulfilled(tweet));
+      const advert = await services.adverts.getAdvert(advertId);
+      dispatch(advertsDetailFulfilled(advert));
     } catch (error) {
       dispatch(advertsDetailRejected(error));
     }
