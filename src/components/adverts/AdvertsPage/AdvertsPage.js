@@ -1,35 +1,27 @@
 import { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { areAdvertsLoaded, selectAdverts } from "../../../store/selectors";
+import { loadAdverts } from "../../../store/actions";
 
 import FiltersForm from "./FiltersForm";
 import AdvertsList from "./AdvertsList";
 import EmptyList from "./EmptyList";
 import storage from "../../../utils/storage";
-import { getAdverts } from "../service";
 import { defaultFilters, filterAdverts } from "./filters";
-import { useNavigate } from "react-router-dom";
-import navigateAfterRequestError from "../../../utils/navigateAfterRequestError";
 
 const getFilters = () => storage.get("filters") || defaultFilters;
 const saveFilters = (filters) => storage.set("filters", filters);
 
 function AdvertsPage() {
-  const navigate = useNavigate();
-  const [adverts, setAdverts] = useState([]);
-  const [isLoading, setIsLoading] = useState(false);
+  const dispatch = useDispatch();
+  const adverts = useSelector(selectAdverts);
+  const isLoading = useSelector(areAdvertsLoaded);
+
   const [filters, setFilters] = useState(getFilters);
 
   useEffect(() => {
-    setIsLoading(true);
-    getAdverts()
-      .then((adverts) => {
-        setIsLoading(false);
-        setAdverts(adverts);
-      })
-      .catch((error) => {
-        setIsLoading(false);
-        navigateAfterRequestError(error, navigate);
-      });
-  }, [navigate]);
+    dispatch(loadAdverts());
+  }, [dispatch]);
 
   useEffect(() => {
     saveFilters(filters);
@@ -37,7 +29,7 @@ function AdvertsPage() {
 
   const filteredAdverts = filterAdverts(adverts, filters);
 
-  if (isLoading) {
+  if (!isLoading) {
     return "Loading...";
   }
 

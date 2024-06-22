@@ -22,16 +22,13 @@ import {
   ADVERTS_DELETED_REJECTED,
   UI_RESET_ERROR,
 } from "./types";
-
 import { areAdvertsLoaded, selectAdvert } from "./selectors";
 
 export const authLoginPending = () => ({ type: AUTH_LOGIN_PENDING });
-
 export const authLoginFulfilled = (accessToken) => ({
   type: AUTH_LOGIN_FULFILLED,
   payload: accessToken,
 });
-
 export const authLoginRejected = (error) => ({
   type: AUTH_LOGIN_REJECTED,
   payload: error,
@@ -53,9 +50,7 @@ export const authLogin = (credentials) => {
 };
 
 export const authLogoutPending = () => ({ type: AUTH_LOGOUT_PENDING });
-
 export const authLogoutFulfilled = () => ({ type: AUTH_LOGOUT_FULFILLED });
-
 export const authLogoutRejected = (error) => ({
   type: AUTH_LOGOUT_REJECTED,
   payload: error,
@@ -85,19 +80,17 @@ export const tagsLoadedRejected = (error) => ({
 });
 
 export const advertsLoadedPending = () => ({ type: ADVERTS_LOADED_PENDING });
-
 export const advertsLoadedFulfilled = (adverts) => ({
   type: ADVERTS_LOADED_FULFILLED,
   payload: adverts,
 });
-
 export const advertsLoadedRejected = (error) => ({
   type: ADVERTS_LOADED_REJECTED,
   payload: error,
   error: true,
 });
 
-export const loadTweets = () => {
+export const loadAdverts = () => {
   return async function (dispatch, getState, { services }) {
     const state = getState();
     if (areAdvertsLoaded(state)) {
@@ -105,7 +98,7 @@ export const loadTweets = () => {
     }
     try {
       dispatch(advertsLoadedPending());
-      const adverts = await services.adverts.getLatestTweets();
+      const adverts = await services.adverts.getAdverts();
       dispatch(advertsLoadedFulfilled(adverts));
     } catch (error) {
       dispatch(advertsLoadedRejected(error));
@@ -114,12 +107,10 @@ export const loadTweets = () => {
 };
 
 export const advertsDetailPending = () => ({ type: ADVERTS_DETAIL_PENDING });
-
 export const advertsDetailFulfilled = (tweet) => ({
   type: ADVERTS_DETAIL_FULFILLED,
   payload: tweet,
 });
-
 export const advertsDetailRejected = (error) => ({
   type: ADVERTS_DETAIL_REJECTED,
   payload: error,
@@ -144,12 +135,10 @@ export const loadTweet = (tweetId) => {
 };
 
 export const advertsCreatedPending = () => ({ type: ADVERTS_CREATED_PENDING });
-
 export const advertsCreatedFulfilled = (tweet) => ({
   type: ADVERTS_CREATED_FULFILLED,
   payload: tweet,
 });
-
 export const advertsCreatedRejected = (error) => ({
   type: ADVERTS_CREATED_REJECTED,
   payload: error,
@@ -172,11 +161,9 @@ export const createTweet = (tweet) => {
 };
 
 export const advertsDeletedPending = () => ({ type: ADVERTS_DELETED_PENDING });
-
 export const advertsDeletedFulfilled = () => ({
   type: ADVERTS_DELETED_FULFILLED,
 });
-
 export const advertsDeletedRejected = (error) => ({
   type: ADVERTS_DELETED_REJECTED,
   payload: error,
