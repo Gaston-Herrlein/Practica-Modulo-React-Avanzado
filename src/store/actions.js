@@ -72,7 +72,10 @@ export const logout = () => {
 };
 
 export const tagsLoadedPending = () => ({ type: TAGS_LOADED_PENDING });
-export const tagsLoadedFulfilled = () => ({ type: TAGS_LOADED_FULFILLED });
+export const tagsLoadedFulfilled = (tags) => ({
+  type: TAGS_LOADED_FULFILLED,
+  payload: tags,
+});
 export const tagsLoadedRejected = (error) => ({
   type: TAGS_LOADED_REJECTED,
   payload: error,
@@ -88,9 +91,9 @@ export const loadTags = () => {
     try {
       dispatch(tagsLoadedPending());
       const tags = await services.adverts.getTags();
-      dispatch(advertsLoadedFulfilled(tags));
+      dispatch(tagsLoadedFulfilled(tags));
     } catch (error) {
-      dispatch(advertsLoadedRejected(error));
+      dispatch(tagsLoadedRejected(error));
     }
   };
 };
